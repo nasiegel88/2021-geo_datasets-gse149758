@@ -8,12 +8,31 @@ output: html_document
 ---
 
 ```{r echo = FALSE}
-files.sources = list(c("R/packages.r", "R/download-data.r",
-                       "R/combine-objects.r"))
-sapply(files.sources, source)
+int <- readRDS("./output/rdata/2021_November_05_12:32_gse_control_integrated.RData")
 ```
 
-```{r echo = FALSE}
-load(combined)
+```{r}
+p <- DimPlot(int, reduction = "umap", group.by = "orig.ident")
+p
+ggsave(file=file.path("output", "results", 
+                  paste("grouped_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
 ```
+
+```{r}
+p <- DimPlot(int, reduction = "umap", label = TRUE)
+p
+ggsave(file=file.path("output", "results", 
+                  paste("cell-types_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
+```
+
+```{r}
+p = FeaturePlot(object = int, 
+            features = c("ADAMDEC1"),
+            cols = c("grey", "blue"),
+            reduction  = "umap")
+p
+ggsave(file=file.path("output", "results", 
+                  paste("ADAMDEC1_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
+```
+
 
