@@ -1,6 +1,6 @@
 # install sccatch from github
 if(!require(Seurat)){
-  install.packages("Seurat")
+  install.packages("Seurat", repos = "http://cran.us.r-project.org")
   library(Seurat)
 }
 if(!require(scCATCH)){
