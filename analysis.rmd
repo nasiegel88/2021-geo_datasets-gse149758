@@ -1,0 +1,19 @@
+---
+title: "GSE149758 Control Animals"
+author: "Noah Siegel"
+date: "`r format(Sys.time(), '%d %B, %Y, %H:%M')`"
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = "documents") })
+output: html_document
+---
+
+```{r echo = FALSE}
+files.sources = list(c("R/packages.r", "R/download-data.r",
+                       "R/combine-objects.r"))
+sapply(files.sources, source)
+```
+
+```{r echo = FALSE}
+load(combined)
+```
+

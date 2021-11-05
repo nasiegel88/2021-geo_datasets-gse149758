@@ -23,21 +23,16 @@ if(!require(remotes)){
   install.packages('remotes')
   library('remotes')
 }
-if(!require(reticulate)){
-  install.packages("reticulate")
-  Sys.setenv(RETICULATE_PYTHON=miniconda_path())
-  library('reticulate')
-}
 if(!require(sctransform)){
-  devtools::install_github(repo = 'ChristophH/sctransform')
+  devtools::install_github(repo = 'ChristophH/sctransform', force = TRUE)
   library(sctransform)
 }
 if(!require(Seurat)){
-  devtools::install_github(repo = "satijalab/seurat", ref = "develop")
+  install.packages('Seurat')
   library(Seurat)
 }
 if(!require(scCATCH)){
-  devtools::install_github('ZJUFanLab/scCATCH')
+  devtools::install_github('ZJUFanLab/scCATCH', force = TRUE)
   library('scCATCH')
 }
 if(!require(patchwork)){
@@ -80,19 +75,6 @@ if(!require(data.table)){
   install.packages("data.table")
   library('data.table')
 }
-# RNA velocity using python
-if(!require(SeuratDisk)){
-  remotes::install_github("mojaveazure/seurat-disk")
-  library(SeuratDisk)
-}
-if(!require(SeuratWrappers)){
-  remotes::install_github('satijalab/seurat-wrappers')
-  library(SeuratWrappers)
-}
-if(!require(velocyto.R)){
-  install_github("velocyto-team/velocyto.R")
-  library(velocyto.R)
-}
 # Bioconductor
 if(!require(multtest)){
   BiocManager::install("multtest")
@@ -118,13 +100,11 @@ if(!require(pcaMethods)){
   BiocManager::install("pcaMethods")
   library(pcaMethods)
 }
-if(!require(EnhancedVolcano)){
-  BiocManager::install("EnhancedVolcano")
-  library('EnhancedVolcano')
-}
-
-
 if(!require(rhdf5)){
   BiocManager::install("rhdf5")
   library('rhdf5')
+}
+if(!require(hdf5r)){
+  install.packages('hdf5r')
+  library('hdf5r')
 }
