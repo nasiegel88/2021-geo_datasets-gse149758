@@ -4,7 +4,7 @@
 #SBATCH -N 1                   # one "node", or computer
 #SBATCH -n 1                   # one task for this node
 #SBATCH -c 1                   # eight cores per task
-#SBATCH -t 30:00:00            # ask for no more than 30 minutes
+#SBATCH -t 72:00:00            # ask for no more than 30 minutes
 #SBATCH --mem=16Gb             # ask for no more than 10 GB of memory
 
 # initialize conda
@@ -20,9 +20,8 @@ set -o nounset
 set -o errexit
 set -x
 
-# Run r scripts
-#Rscript $HOME/ets04-2/R/grouped-sccatch.R # rna counts
-Rscript $HOME/2021-geo_datasets-gse149758/R/catch.r # rna velocity
+# Run r script
+Rscript $HOME/2021-geo_datasets-gse149758/R/catch.r 
 
 # print out various information about the job
 env | grep SLURM            # Print out values of the current jobs SLURM environment variables
