@@ -7,8 +7,12 @@ knit: (function(inputFile, encoding) {
 output: html_document
 ---
 
+```{r}
+source("R/main.r")
+```
+
 ```{r echo = FALSE}
-int <- readRDS("./output/rdata/2021_November_05_12:32_gse_control_integrated.RData")
+int <- readRDS("./output/rdata/2021_November_05_17:22_gse_control_integrated.RData")
 ```
 
 ```{r}
@@ -34,5 +38,3 @@ p
 ggsave(file=file.path("output", "results", 
                   paste("ADAMDEC1_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
 ```
-
-
