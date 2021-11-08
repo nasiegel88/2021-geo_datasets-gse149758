@@ -1,8 +1,4 @@
 # install sccatch from github
-if(!require(Seurat)){
-  install.packages("Seurat", repos = "http://cran.us.r-project.org")
-  library(Seurat)
-}
 if(!require(scCATCH)){
   devtools::install_github("ZJUFanLab/scCATCH", force = TRUE)
   library(scCATCH)
@@ -28,4 +24,4 @@ set.seed(1)
 out_file <- file.path(getwd(), "output", "rdata",
           paste(format(Sys.time(),
                        '%Y_%B_%d_%H:%M'), "sccatch-output.RData", sep = "_"))
-save.image(file = out_file)
+saveRDS(object = clu_markers_combined, file = out_file)
