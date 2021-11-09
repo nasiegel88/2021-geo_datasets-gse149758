@@ -16,7 +16,7 @@ merglung <- merge(x = control_1, y = c(control_2, control_3),
                   add.cell.ids = c("control-1", "control-2", "control-3"),
                   project = "control_animals")
 
-file <- paste(format(Sys.time(),'%Y_%B_%d_%H:%M'),
+file <- paste(format(Sys.time(),'%Y_%b_%d_%H:%M'),
               "azimuth_input.rds", sep = "_")
 full <- file.path(getwd(),
                       "output", "rdata", file)
