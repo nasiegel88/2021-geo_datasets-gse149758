@@ -1,14 +1,12 @@
+#!/usr/bin/Rscript
+
 # install sccatch from github
 if(!require(scCATCH)){
   devtools::install_github("ZJUFanLab/scCATCH", force = TRUE)
   library(scCATCH)
 }
-if(!require(ulimit)){
-  devtools::install_github("krlmlr/ulimit", force = TRUE)
-  library(ulimit)
-}
 
-int <- readRDS("./output/rdata/2021_November_05_12:32_gse_control_integrated.RData")
+int <- readRDS("./output/rdata/2021_November_08_12:57_gse_control_integrated.rdata")
 
 require('scCATCH')
 clu_markers_combined <- findmarkergenes(object = int,
