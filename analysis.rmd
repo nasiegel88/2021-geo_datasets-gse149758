@@ -42,7 +42,7 @@ ggsave(file=file.path("output", "results",
 p <- DimPlot(object, reduction = "umap", group.by = "predicted.annotation.l1", label = T)
 p
 ggsave(file=file.path("output", "results", 
-                  paste("cell-types_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
+                  paste("cell-types_assigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
 ```
 
 ## ADAMDEC1 EXpression
@@ -57,14 +57,14 @@ ggsave(file=file.path("output", "results",
 ```
 
 ```{r}
-p <- VlnPlot(object, features = "ADAMDEC1", split.by = c("orig.ident"))
+p <- VlnPlot(object, features = "ADAMDEC1", group.by = c("orig.ident"), assay = "RNA")
 p
 ggsave(file=file.path("output", "results", 
                   paste("ADAMDEC1_group", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
 ```
 
 ```{r}
-p <- VlnPlot(object, features = "ADAMDEC1", group.by = c("predicted.annotation.l1"))
+p <- VlnPlot(object, features = "ADAMDEC1", group.by = c("predicted.annotation.l1"), assay = "RNA")
 p
 ggsave(file=file.path("output", "results", 
                   paste("ADAMDEC1_celltype", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
