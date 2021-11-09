@@ -11,30 +11,63 @@ output: html_document
 source("R/main.r")
 ```
 
-```{r echo = FALSE}
-int <- readRDS("./output/rdata/2021_November_05_17:22_gse_control_integrated.RData")
+```{r}
+int <- readRDS(file.path(getwd(), "output/rdata/2021_November_08_14:56_azimuth_input.rds"))
+object <- AddAzimuthResults(int, filename = file.path(getwd(), 'output/rdata/azimuth_results.Rds'))
+
+# SCTransform
+object[["percent.mt"]] <- PercentageFeatureSet(object, pattern = "^mt-")
+object <- SCTransform(object, vars.to.regress = "percent.mt", verbose = FALSE)
 ```
 
 ```{r}
-p <- DimPlot(int, reduction = "umap", group.by = "orig.ident")
+# Standard visualization and clustering workflow
+object <- FindVariableFeatures(object)
+object <- ScaleData(object)
+object <- RunPCA(object, npcs = 30, verbose = FALSE)
+# t-SNE and Clustering
+object <- RunUMAP(object, reduction = "pca", dims = 1:20)
+object <- FindNeighbors(object, reduction = "pca", dims = 1:20)
+object <- FindClusters(object, resolution = 0.5)
+```
+
+```{r}
+p <- DimPlot(object, reduction = "umap", group.by = "orig.ident", label = F)
 p
 ggsave(file=file.path("output", "results", 
-                  paste("grouped_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
+                  paste("grouped", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
 ```
 
 ```{r}
-p <- DimPlot(int, reduction = "umap", label = TRUE)
+p <- DimPlot(object, reduction = "umap", group.by = "predicted.annotation.l1", label = T)
 p
 ggsave(file=file.path("output", "results", 
                   paste("cell-types_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
 ```
 
+## ADAMDEC1 EXpression
 ```{r}
-p = FeaturePlot(object = int, 
+p = FeaturePlot(object = object, 
             features = c("ADAMDEC1"),
             cols = c("grey", "blue"),
             reduction  = "umap")
 p
 ggsave(file=file.path("output", "results", 
-                  paste("ADAMDEC1_unassigned", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
+                  paste("ADAMDEC1", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
 ```
+
+```{r}
+p <- VlnPlot(object, features = "ADAMDEC1", split.by = c("orig.ident"))
+p
+ggsave(file=file.path("output", "results", 
+                  paste("ADAMDEC1_group", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
+```
+
+```{r}
+p <- VlnPlot(object, features = "ADAMDEC1", group.by = c("predicted.annotation.l1"))
+p
+ggsave(file=file.path("output", "results", 
+                  paste("ADAMDEC1_celltype", ".png", sep="")), plot=p, width=15, height=18, dpi=600)
+```
+
+
