@@ -15,12 +15,17 @@ source("R/main.r")
 int <- readRDS(file.path(getwd(), "output/rdata/2021_November_08_14:56_azimuth_input.rds"))
 n3 <- AddAzimuthResults(int, filename = file.path(getwd(), 'output/rdata/azimuth_results.Rds'))
 
-# SCTransform
-n3[["percent.mt"]] <- PercentageFeatureSet(n3, pattern = "^mt-")
-n3 <- SCTransform(n3, vars.to.regress = "percent.mt", verbose = FALSE)
+n3@meta.data$sex <- ifelse( n3@meta.data$orig.ident == "control_2",
+                            "Female","Male")
+n3$celltype.sex <- paste(n3$sex, n3$predicted.annotation.l1, sep = "_")
+Idents(n3) <- "celltype.sex"
+mac <- n3
 ```
 
 ```{r warning =FALSE, include=FALSE}
+# SCTransform
+n3[["percent.mt"]] <- PercentageFeatureSet(n3, pattern = "^mt-")
+n3 <- SCTransform(n3, vars.to.regress = "percent.mt", verbose = FALSE)
 # Standard visualization and clustering workflow
 n3 <- FindVariableFeatures(n3)
 n3 <- ScaleData(n3)
@@ -29,19 +34,6 @@ n3 <- RunPCA(n3, npcs = 30, verbose = FALSE)
 n3 <- RunUMAP(n3, reduction = "pca", dims = 1:20)
 n3 <- FindNeighbors(n3, reduction = "pca", dims = 1:20)
 n3 <- FindClusters(n3, resolution = 0.5)
-```
-
-```{r echo=FALSE}
-n3@meta.data$sex <-
-  ifelse(
-    n3@meta.data$orig.ident == "control_2" ,
-    "Female",
-    "Male")
-```
-
-```{r echo=FALSE}
-n3$celltype.sex <- paste(n3$sex, n3$predicted.annotation.l1, sep = "_")
-Idents(n3) <- "celltype.sex"
 ```
 
 ```{r echo=FALSE}
@@ -133,3 +125,93 @@ p
 ggsave(file=file.path("output", "results", "3n",
                   paste("ADAMDEC1_celltype", ".png", sep="")), plot=p, width=14, height=8, dpi=600)
 ```
+
+## Macrophages
+
+```{r}
+mac <- subset(x = mac, subset = predicted.annotation.l1 == "Macrophage")
+```
+
+```{r}
+# SCTransform
+mac[["percent.mt"]] <- PercentageFeatureSet(mac, pattern = "^mt-")
+mac <- SCTransform(mac, vars.to.regress = "percent.mt", verbose = FALSE)
+# Standard visualization and clustering workflow
+mac <- FindVariableFeatures(mac)
+mac <- ScaleData(mac)
+mac <- RunPCA(mac, npcs = 30, verbose = FALSE)
+# t-SNE and Clustering
+mac <- RunUMAP(mac, reduction = "pca", dims = 1:20)
+mac <- FindNeighbors(mac, reduction = "pca", dims = 1:20)
+mac <- FindClusters(mac, resolution = 0.5)
+```
+
+```{r}
+p <- DimPlot(mac, reduction = "umap", group.by = "orig.ident", label = F) &
+  theme(text = element_text(),
+        axis.text.x=element_text(angle=45, hjust=1, size=20),
+        axis.title = element_text(size=20),
+        axis.title.y.right = element_text(size = 20),
+        legend.text=element_text(size=20),
+        legend.title=element_text(size=20),
+        axis.line = element_line(size=1.1))
+p
+ggsave(file=file.path("output", "results", "3n",
+                  paste("macrophage-group", ".png", sep="")), plot=p, width=14, height=8, dpi=600)
+```
+```{r}
+p = FeaturePlot(object = mac, 
+            features = c("ADAMDEC1"),
+            cols = c("grey", "blue"),
+            reduction  = "umap")&
+  theme(text = element_text(),
+        axis.text.x=element_text(angle=45, hjust=1, size=20),
+        axis.title = element_text(size=20),
+        axis.title.y.right = element_text(size = 20),
+        legend.text=element_text(size=20),
+        legend.title=element_text(size=20),
+        axis.line = element_line(size=1.1))
+p
+ggsave(file=file.path("output", "results", "3n",
+                  paste("macrophage-ADAMDEC1", ".png", sep="")), plot=p, width=14, height=8, dpi=600)
+p
+```
+
+
+```{r}
+p <- DimPlot(mac, reduction = "umap", group.by = "sex",
+             cols = c("pink", "lightblue"), label = F)&
+  theme(text = element_text(),
+        axis.text.x=element_text(angle=45, hjust=1, size=20),
+        axis.title = element_text(size=20),
+        axis.title.y.right = element_text(size = 20),
+        legend.text=element_text(size=20),
+        legend.title=element_text(size=20),
+        axis.line = element_line(size=1.1))
+p
+ggsave(file=file.path("output", "results", "3n",
+                  paste("macrophage-sex", ".png", sep="")), plot=p, width=14, height=8, dpi=600)
+```
+```{r}
+poscells <- WhichCells(mac, expression = ADAMDEC1 > 0)
+mac$Macrophages<- ifelse(colnames(mac) %in% poscells, "ADAMDEC1+ Macrophage", "Conv. Macrophage")
+```
+
+```{r}
+p <- DimPlot(mac, reduction = "umap", group.by = "Macrophages",
+             cols = c("red", "blue"), label = F)&
+  theme(text = element_text(),
+        axis.text.x=element_text(angle=45, hjust=1, size=20),
+        axis.title = element_text(size=20),
+        axis.title.y.right = element_text(size = 20),
+        legend.text=element_text(size=20),
+        legend.title=element_text(size=20),
+        axis.line = element_line(size=1.1))
+p
+ggsave(file=file.path("output", "results", "3n",
+                  paste("macrophage-types", ".png", sep="")), plot=p, width=14, height=8, dpi=600)
+```
+
+
+
+
