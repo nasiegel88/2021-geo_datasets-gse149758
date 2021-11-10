@@ -13,7 +13,7 @@ source("R/main.r")
 
 ```{r message = FALSE, warning = FALSE, results = "hide", echo = FALSE}
 # increase memory allocation for 24Gb
-ulimit::memory_limit(24000)
+ulimit::memory_limit(28000)
 ```
 
 ```{r echo=FALSE}
@@ -214,10 +214,21 @@ p <- dittoHeatmap(scgsea, genes = NULL, metas = names(ES),
              fontsize = 7, 
              cluster_cols = TRUE)
 path=file.path("output", "results", "3n", "HALLMARK",
-               paste("gsea", ".png",  sep = ""))
+               paste("gsea-macrophage", ".png",  sep = ""))
 p
 ggsave(file = path, plot = p, width=14, height=8, dpi=600)
+```
 
+```{r cache=F}
+p <- dittoHeatmap(scgsea, genes = NULL, metas = names(ES), 
+             annot.by = c("sex"),
+             order.by = c("sex"),
+             fontsize = 7, 
+             cluster_cols = TRUE)
+path=file.path("output", "results", "3n", "HALLMARK",
+               paste("gsea-sex", ".png",  sep = ""))
+p
+ggsave(file = path, plot = p, width=14, height=8, dpi=600)
 ```
 
 ```{r}
