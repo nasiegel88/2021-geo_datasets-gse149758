@@ -108,3 +108,15 @@ if(!require(hdf5r)){
   install.packages('hdf5r')
   library('hdf5r')
 }
+if(!require(xlsx)){
+  install.packages('xlsx')
+  library('xlsx')
+}
+if(!require(EnhancedVolcano)){
+  BiocManager::install("EnhancedVolcano")
+  library('EnhancedVolcano')
+}
+if(!require(ulimit)){
+  devtools::install_github("krlmlr/ulimit", force = TRUE)
+  library(ulimit)
+}
