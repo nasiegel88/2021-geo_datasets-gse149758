@@ -1581,18 +1581,6 @@
       "Repository": "CRAN",
       "Hash": "50cf822feb64bb3977bda0b7091be623"
     },
-    "scCATCH": {
-      "Package": "scCATCH",
-      "Version": "2.1",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "scCATCH",
-      "RemoteUsername": "ZJUFanLab",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "011919a9d7fbd5fc224da49ad2f4164df2edad83",
-      "Hash": "8be2b21296102d9caba31794e7221e53"
-    },
     "scales": {
       "Package": "scales",
       "Version": "1.1.1",
