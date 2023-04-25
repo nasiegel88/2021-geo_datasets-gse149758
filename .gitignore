@@ -1,9 +1,5 @@
-.Rproj.user
-.Rhistory
-.RData
-.rds
-.Ruserdata
-output/rdata/*
+rdata/*.rds
+rdata/*.RData
 .jupyter-server-log.txt
 .TinyTeX/
 .rstudio/
@@ -16,9 +12,8 @@ bin/
 .conda/
 .cache/
 .ipynb_checkpoints/
-documents/.ipynb_checkpoints/
 .config/
-figures/lefse_tables/*.in
-figures/lefse_tables/*.res
 .bash_history
 .Renviron
+.wget-hsts
+results/'~$degs.xlsx'

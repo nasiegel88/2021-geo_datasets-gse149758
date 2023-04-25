@@ -2,32 +2,34 @@ name: Esaulova-et-al
 channels:
  - conda-forge
  - bioconda
-dependences:
- - r-biocmanager
- - r-rmarkdown
- - r-tinytex
- - r-devtools
- - r-remotes
- - r-sctransform
- - r-seurat
- - r-patchwork
- - r-dplyr
- - r-ggplot2
- - r-kableextra
- - r-purrr
- - r-gdtools
- - r-flextable
- - r-pracma
- - r-stringr
- - r-data.table
- - bioconductor-multtest
- - r-metap 1.1
- - bioconductor-escape
- - bioconductor-dittoseq
- - bioconductor-singlecellexperiment
- - bioconductor-pcamethods
- - bioconductor-rhdf5
- - r-hdf5r
- - r-xlsx
- - bioconductor-enhancedvolcano
+dependencies:
+ - r-base=4.1.1=hde4fec0_2
+ - r-biocmanager=1.30.20=r41hc72bb7e_0
+ - r-rmarkdown=2.21=r41hc72bb7e_0
+ - r-tinytex=0.45=r41hc72bb7e_0
+ - r-devtools=2.4.5=r41hc72bb7e_1
+ - r-remotes=2.4.2=r41hc72bb7e_1
+ - r-sctransform=0.3.5=r41h9f5de39_1
+ - r-seurat=4.3.0=r41h38f115c_0
+ - r-seuratobject=4.1.3=r41h38f115c_0
+ - r-patchwork=1.1.2=r41hc72bb7e_1
+ - r-dplyr=1.1.2=r41ha503ecb_0
+ - r-ggplot2=3.4.2=r41hc72bb7e_0
+ - r-kableextra=1.3.4=r41hc72bb7e_1
+ - r-purrr=1.0.1=r41h133d619_0
+ - r-gdtools=0.3.3=r41he0ce631_0
+ - r-flextable=0.9.1=r41hc72bb7e_0
+ - r-pracma=2.4.2=r41hc72bb7e_1
+ - r-stringr=1.5.0=r41h785f33e_0
+ - r-data.table=1.14.8=r41h133d619_0
+ - bioconductor-multtest=2.50.0=r41hc0cfd56_2
+ - r-metap=1.1=r41hc72bb7e_3
+ - bioconductor-escape=1.4.0=r41hdfd78af_0
+ - bioconductor-dittoseq=1.6.0=r41hdfd78af_0
+ - bioconductor-singlecellexperiment=1.16.0=r41hdfd78af_0
+ - bioconductor-pcamethods=1.86.0=r41hc247a5b_2
+ - bioconductor-rhdf5=2.38.1=r41hbe1951d_0
+ - r-hdf5r=1.3.8=r41haf92f5d_0
+ - r-xlsx=0.6.5=r41hc72bb7e_1
+ - bioconductor-enhancedvolcano=1.12.0=r41hdfd78af_0
 

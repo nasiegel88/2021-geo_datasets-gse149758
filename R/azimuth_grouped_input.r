@@ -18,7 +18,8 @@ merglung <- merge(x = control_1, y = c(control_2, control_3),
 
 file <- paste(format(Sys.time(),'%Y_%b_%d_%H:%M'),
               "azimuth_input.rds", sep = "_")
-full <- file.path(getwd(),
-                      "output", "rdata", file)
+
+dir.create('rdata', showWarnings = FALSE, recursive = TRUE)
+full <- file.path(getwd(), "rdata", file)
 
 saveRDS(object = merglung, file = full)
