@@ -1,0 +1,33 @@
+name: Esaulova-et-al
+channels:
+ - conda-forge
+ - bioconda
+dependences:
+ - r-biocmanager
+ - r-rmarkdown
+ - r-tinytex
+ - r-devtools
+ - r-remotes
+ - r-sctransform
+ - r-seurat
+ - r-patchwork
+ - r-dplyr
+ - r-ggplot2
+ - r-kableextra
+ - r-purrr
+ - r-gdtools
+ - r-flextable
+ - r-pracma
+ - r-stringr
+ - r-data.table
+ - bioconductor-multtest
+ - r-metap 1.1
+ - bioconductor-escape
+ - bioconductor-dittoseq
+ - bioconductor-singlecellexperiment
+ - bioconductor-pcamethods
+ - bioconductor-rhdf5
+ - r-hdf5r
+ - r-xlsx
+ - bioconductor-enhancedvolcano
+
